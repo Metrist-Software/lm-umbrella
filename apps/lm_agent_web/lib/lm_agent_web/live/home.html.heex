@@ -1,0 +1,22 @@
+<.header>
+  Dashboard
+
+  <:actions>
+    <.link patch={~p"/edit"}>
+      <.button>Edit</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.live_component id="dashboard-container" module={LmAgentWeb.Components.DashboardContainer} dashboard={@dashboard} />
+
+<.modal :if={@live_action == :edit} id="dashboard-modal" show on_cancel={JS.patch(~p"/")}>
+  <.live_component
+    module={LmAgentWeb.DashboardLive.FormComponent}
+    id={@dashboard.id || :new}
+    title="Edit Dashboard"
+    action={@live_action}
+    dashboard={@dashboard}
+    patch={~p"/"}
+  />
+</.modal>

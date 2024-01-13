@@ -1,0 +1,13 @@
+<div>
+  <header class="mb-8">
+    <h2 class="text-3xl">
+      Logs
+    </h2>
+  </header>
+
+  <pre
+    id="viewer"
+    class="w-full bg-black text-green-600 px-5 overflow-x-hidden"
+    phx-hook="LogViewer"
+  ><%= @buffer.lines %></pre>
+</div>

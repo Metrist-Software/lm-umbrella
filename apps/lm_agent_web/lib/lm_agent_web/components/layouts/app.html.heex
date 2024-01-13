@@ -1,0 +1,28 @@
+<header class="px-4 sm:px-6 lg:px-8 ">
+  <div class="flex items-center justify-between border-b border-zinc-200 py-3 text-sm">
+    <div class="flex items-center gap-4">
+      <a class="font-medium text-indigo-600 no-underline hover:underline" href="/">
+        <div class="flex">
+          <div class="flex flex-col">
+            <div class="self-end">Local</div>
+            <div class="self-end">Metrics</div>
+          </div>
+          <div class="border-l-2 border-indigo-500 ml-2 mr-2"></div>
+          <div>
+            <Heroicons.chart_bar class="w-10 h-10 stroke-indigo-500" />
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="flex items-center gap-4 font-semibold leading-6 text-indigo-950">
+      Agent running on <%= LmAgent.agent_id() %>
+      <a href="https://metrics.metri.st">LM Backend</a>
+    </div>
+  </div>
+</header>
+<main class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl">
+    <.flash_group flash={@flash} />
+    <%= @inner_content %>
+  </div>
+</main>

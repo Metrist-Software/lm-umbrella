@@ -1,0 +1,14 @@
+<.header>
+  Dashboard
+  <:actions>
+    <.link navigate={~p"/setup"}><.button>Agent Setup</.button></.link>
+    <.link navigate={~p"/dashboards/#{@dashboard.id}"}><.button>Manage Dashboard</.button></.link>
+  </:actions>
+</.header>
+
+Your API key: <%=  @api_key %>
+<br />
+Your Account ID: <%= @account_id %>
+<br/>
+
+<.live_component id="dashboard-container" module={LmBackendWeb.Components.DashboardContainer} dashboard={@dashboard} account_id={@account_id}/>

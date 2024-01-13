@@ -1,0 +1,41 @@
+<.header>
+  Listing Dashboards
+  <:actions>
+    <.link patch={~p"/dashboards/new"}>
+      <.button>New Dashboard</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="dashboards"
+  rows={@streams.dashboards}
+  row_click={fn {_id, dashboard} -> JS.navigate(~p"/dashboards/#{dashboard}") end}
+>
+  <:col :let={{_id, dashboard}} label="Id"><%= dashboard.id %></:col>
+  <:action :let={{_id, dashboard}}>
+    <div class="sr-only">
+      <.link navigate={~p"/dashboards/#{dashboard}"}>Show</.link>
+    </div>
+    <.link patch={~p"/dashboards/#{dashboard}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, dashboard}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: dashboard.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="dashboard-modal" show on_cancel={JS.patch(~p"/dashboards")}>
+  <.live_component
+    module={LmBackendWeb.DashboardLive.FormComponent}
+    id={@dashboard.id || :new}
+    title={@page_title}
+    action={@live_action}
+    dashboard={@dashboard}
+    patch={~p"/dashboards"}
+  />
+</.modal>

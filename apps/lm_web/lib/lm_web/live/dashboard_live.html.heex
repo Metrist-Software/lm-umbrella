@@ -1,0 +1,20 @@
+<div>
+  <header class="mb-8">
+    <h2 class="text-3xl">
+      Title
+    </h2>
+  </header>
+
+  <%= live_react_component("Components.MyComponent", [specs: @specs], id: "comp-id-1") %>
+
+  <div class="grid grid-cols-6 md:grid-cols-12 gap-4 bg-gray-300 col-span">
+    <div
+      :for={panel <- @config.panels}
+      id={"#{panel.metric}-container"}
+      class={"col-span-#{panel.width} min-h-[300px]"}
+      phx-hook="SizeListener"
+    >
+      <.live_component :if={@ready} module={LmWeb.VegaLiteComponent} id={panel.metric} spec={if @ready, do: @specs[panel.metric], else: nil} />
+    </div>
+  </div>
+</div>
